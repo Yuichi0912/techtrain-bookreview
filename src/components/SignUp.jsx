@@ -8,6 +8,7 @@ import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { logIn } from "../redux/authSlice";
 import { useEffect } from "react";
+import "./SignUp.scss";
 
 export const SignUp = () => {
   const auth = useSelector((state) => state.auth.isLogIn);
@@ -44,7 +45,7 @@ export const SignUp = () => {
   // console.log(values);
   // valuesにFormikで渡した値が入っている
 
- useEffect(() => {
+  useEffect(() => {
     if (auth) return navigate("/");
   }, []);
 
@@ -109,64 +110,53 @@ export const SignUp = () => {
 
   return (
     <div>
-      <>
-        <main>
-          <h1>SignUpページ</h1>
-          <form onSubmit={handleSubmit}>
-            <label htmlFor="username">ユーザー名</label>
-            <br />
-            <input
-              type="text"
-              name="name"
-              // nameとvalueの値一緒にしたら打てるようになった
-              className="username-input"
-              onChange={handleChange}
-              value={values.name}
-            />
-            <br />
-            {errors.name && <div>{errors.name}</div>}
-            <br />
-            <label htmlFor="email">メールアドレス</label>
-            <br />
-            <input
-              type="email"
-              name="email"
-              onChange={handleChange}
-              value={values.email}
-            />
-            <br />
-            {errors.email && <div>{errors.email}</div>}
-            <br />
-            <label htmlFor="password">パスワード</label>
-            <br />
-            <input
-              type="password"
-              name="password"
-              onChange={handleChange}
-              value={values.password}
-            />
-            <br />
-            {errors.password && <div>{errors.password}</div>}
-            <br />
-            <label>ユーザーアイコンの登録</label>
-            <br />
-            <input
-              type="file"
-              accept="image/png, image/jpg"
-              onChange={handleImageChange}
-            ></input>
-            <br />
-            {/* <img src={image} alt="" /> */}
-            <br />
-            <button type="submit" onClick={onSignUp}>
-              登録する
-            </button>
-          </form>
-          <Link to="/login">ログインはこちら</Link>
+      <main className="signup">
+        <h1>SignUpページ</h1>
+        <form onSubmit={handleSubmit} className="signup-form">
+          <label htmlFor="username">ユーザー名</label>
+          <input
+            type="text"
+            name="name"
+            // nameとvalueの値一緒にしたら打てるようになった
+            className="name-input"
+            onChange={handleChange}
+            value={values.name}
+          />
+          {errors.name && <div>{errors.name}</div>}
+          <label htmlFor="email">メールアドレス</label>
+          <input
+            type="email"
+            name="email"
+            onChange={handleChange}
+            value={values.email}
+            className="email-input"
+          />
+          {errors.email && <div>{errors.email}</div>}
+          <label htmlFor="password">パスワード</label>
+          <input
+            type="password"
+            name="password"
+            onChange={handleChange}
+            value={values.password}
+            className="password-input" 
+          />
+          {errors.password && <div>{errors.password}</div>}
+          <label>ユーザーアイコンの登録</label>
+          <input
+            type="file"
+            accept="image/png, image/jpg"
+            onChange={handleImageChange}
+            className="icon"
+          ></input>
           {/* <img src={image} alt="" /> */}
-          <p>{errorDataMsg}</p>
-        </main>
-      </>
+          <button type="submit" onClick={onSignUp} className="signup-button">
+            登録する
+          </button>
+        </form>
+        <Link to="/login" className="login">ログインはこちら</Link>
+        {/* <img src={image} alt="" /> */}
+        <p className="error-message">{errorDataMsg}</p>
+      </main>
     </div>
   );
 };

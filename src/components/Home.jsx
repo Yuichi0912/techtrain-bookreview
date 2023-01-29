@@ -4,6 +4,7 @@ import axios from "axios";
 import { useEffect } from "react";
 // import { Link } from "react-router-dom";
 import ReactPaginate from "react-paginate";
+import "./Home.scss";
 
 export const Home = () => {
   const [cookies] = useCookies();
@@ -52,7 +53,7 @@ export const Home = () => {
   }, []);
 
   return (
-    <div className="review-list">
+    <div className="review-page">
       <main>
         <p className="review-list__errormsg">{errorMessage}</p>
         <h1>書籍レビュー一覧</h1>
@@ -60,19 +61,21 @@ export const Home = () => {
         {lists.map((lists) => {
           console.log(lists);
           return (
-            <>
-              <h3 key={lists.id}>{lists.title}</h3>
-              <p>レビュワー:{lists.reviewer}</p>
-              <a href={lists.url}>{lists.url}</a>
-              <p>▶︎{lists.review}</p>
-            </>
+            <div key={lists.id} className="review-lists">
+              <h3 className="review-lists__title">{lists.title}</h3>
+              <p className="review-lists__reviewer">レビュワー:{lists.reviewer}</p>
+              <a href={lists.url} className="review-lists__url">{lists.url}</a>
+              <p className="review-lists__review">▶︎{lists.review}</p>
+            </div>
           );
         })}
 
         <ReactPaginate
           breakLabel={"..."}
-          marginPagesDisplayed={1}
-          pageRangeDisplayed={3}
+        //   marginPagesDisplayed={1}
+        //   pageRangeDisplayed={2}
+          containerClassName={'pagination'}
+          subContainerClassName={'pages pagination'}
           previousLabel="<"
           previousClassName="pagination__previous"
           nextLabel=">"

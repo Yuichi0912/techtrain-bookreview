@@ -8,7 +8,7 @@ import { useCookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { logIn } from "../redux/authSlice";
 import { useEffect } from "react";
-
+import "./LogIn.scss"
 
 export const LogIn = () => {
   const auth = useSelector((state)=>state.auth.isLogIn)
@@ -67,13 +67,12 @@ export const LogIn = () => {
 
   return (
     <div>
-      <main className="login">
-        <h1>Signinページ</h1>
-        <form onSubmit={handleSubmit}>
+      <main className="login-page">
+        <h1>ログインする</h1>
+        <form onSubmit={handleSubmit} className="login-form">
           <label className="email-label" data-testid="email-label">
             メールアドレス
           </label>
-          <br />
           <input
             type="email"
             name="email"
@@ -83,13 +82,10 @@ export const LogIn = () => {
             value={values.email}
             // required
           />
-          <br />
           {errors.email && <div>{errors.email}</div>}
-          <br />
           <label className="password-label" data-testid="password-label">
             パスワード
           </label>
-          <br />
           <input
             type="password"
             name="password"
@@ -99,9 +95,7 @@ export const LogIn = () => {
             value={values.password}
             // required
           />
-          <br />
           {errors.password && <div>{errors.password}</div>}
-          <br />
           <button
             type="button"
             className="login-button"
@@ -110,12 +104,10 @@ export const LogIn = () => {
           >
             ログイン
           </button>
-          <br />
-          <br />
         </form>
 
-        <Link to="/signup">アカウントの新規作成はこちら</Link>
-        <p>{errorLogInMsg}</p>
+        <Link to="/signup" className="new-account">アカウントの新規作成はこちら</Link>
+        <p className="error-message">{errorLogInMsg}</p>
       </main>
     </div>
   );

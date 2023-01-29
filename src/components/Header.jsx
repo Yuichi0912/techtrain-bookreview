@@ -6,6 +6,7 @@ import { useCookies } from "react-cookie";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { signOut } from "../redux/authSlice";
+import "./Header.scss"
 
 export const Header = () => {
   const auth = useSelector((state) => state.auth.isLogIn); // authがサインイン状態かどうかはstateの状態により異なる
@@ -46,19 +47,17 @@ export const Header = () => {
   };
 
   return (
-    <>
-      <header>
+      <header className="header">
         <h1>書籍レビューアプリ</h1>
 
         {auth ? (
           <>
             <p>ユーザー：{username}</p>
-            <button onClick={handleLogOut}>ログアウト</button>
+            <button onClick={handleLogOut} className="header__logout-button">ログアウト</button>
           </>
         ) : (
-          <button onClick={handleLogIn}>ログイン</button>
+          <button onClick={handleLogIn} className="header__login-button">ログイン</button>
         )}
       </header>
-    </>
   );
 };

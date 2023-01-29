@@ -1,0 +1,28 @@
+@charset "utf-8";
+
+.signup{
+display: flex;
+flex-direction: column;
+
+    button{
+        margin-bottom:30px;
+        width:300px;
+        border-radius:10px;
+        background-color: rgb(230, 249, 232);
+        color:rgb(175, 156, 156);
+        height:40px;
+        font-size:15px;
+    }
+    input{
+        width:300px;
+        border-radius: 10px;
+        margin-bottom:15px;
+        height:30px;
+    }
+    .password-input{
+        margin-bottom:40px;
+    }
+    p{
+        color:red;
+    }
+}

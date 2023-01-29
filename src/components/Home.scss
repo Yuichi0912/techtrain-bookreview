@@ -1,0 +1,67 @@
+@charset "utf-8";
+
+.review-lists {
+  width: auto;
+  height: 350px;
+  margin: 20px 25px;
+  background-color: rgb(102, 134, 203);
+  border-radius: 20px;
+  text-align: left;
+  padding-left: 20px;
+}
+.review-lists__title {
+  padding-top: 25px;
+  height: 20%;
+  word-break: normal;
+}
+
+.review-lists__reviewer {
+  word-break: normal;
+}
+
+
+.review-lists__url {
+  height: 12%;
+  word-break: break-all;
+}
+.review-lists__review {
+  height: 60%;
+  word-break: normal;
+}
+
+.pagination {
+
+  margin: 0 auto;
+  margin-bottom: 50px;
+  padding-right: 20px;
+  background-color: rgb(86, 136, 228);
+  width: 400px;
+  height: 50px;
+  border-radius: 10px;
+  display: flex;
+  li {
+    margin: auto;
+    list-style: none;
+    a {
+      border-radius: 50%;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      padding: 10px;
+
+      
+    }
+
+    a:hover {
+      background-color: rgba(255, 255, 255, 0.6);
+    }
+
+  }
+
+  // .pagination__previous,
+  // .pagination__next {
+  //   & > a {
+  //     font-size: 14px;
+  //   }
+  // }
+}
