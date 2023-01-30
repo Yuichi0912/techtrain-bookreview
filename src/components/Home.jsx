@@ -5,6 +5,7 @@ import { useEffect } from "react";
 // import { Link } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import "./Home.scss";
+import { url } from "../const";
 
 export const Home = () => {
   const [cookies] = useCookies();
@@ -18,7 +19,7 @@ export const Home = () => {
 
     axios
       .get(
-        `https://ifrbzeaz2b.execute-api.ap-northeast-1.amazonaws.com/books?offset=${offsetNumber}`, // 1件目のデータが先頭に表示されている状態
+        `${url}/books?offset=${offsetNumber}`, // 1件目のデータが先頭に表示されている状態
         {
           headers: {
             Authorization: `Bearer ${cookies.token}`,
@@ -37,7 +38,7 @@ export const Home = () => {
   useEffect(() => {
     axios
       .get(
-        "https://ifrbzeaz2b.execute-api.ap-northeast-1.amazonaws.com/books?offset=0", // 1件目のデータが先頭に表示されている状態
+        `${url}/books?offset=0`, // 1件目のデータが先頭に表示されている状態
         {
           headers: {
             Authorization: `Bearer ${cookies.token}`,

@@ -6,7 +6,8 @@ import { useCookies } from "react-cookie";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { signOut } from "../redux/authSlice";
-import "./Header.scss"
+import "./Header.scss";
+import { url } from "../const";
 
 export const Header = () => {
   const auth = useSelector((state) => state.auth.isLogIn); // authがサインイン状態かどうかはstateの状態により異なる
@@ -19,17 +20,14 @@ export const Header = () => {
 
   useEffect(() => {
     axios
-      .get(
-        "https://ifrbzeaz2b.execute-api.ap-northeast-1.amazonaws.com/users",
-        {
-          headers: {
-            Authorization: `Bearer ${cookies.token}`,
-          },
-        }
-      )
+      .get(`${url}/users`, {
+        headers: {
+          Authorization: `Bearer ${cookies.token}`,
+        },
+      })
       .then((res) => {
         // console.log(res.data.name);
-        setUsername(res.data.name);
+        setUsername(res.data);
       })
       .catch((err) => {
         setErrorMessage(`ユーザーネームの取得に失敗しました。${err}`);
@@ -40,6 +38,10 @@ export const Header = () => {
     navigate("/login");
   };
 
+  const handleEditProfile = () => {
+    navigate("/profile");
+  };
+
   const handleLogOut = () => {
     dispatch(signOut());
     removeCookie("token");
@@ -47,17 +49,22 @@ export const Header = () => {
   };
 
   return (
-      <header className="header">
-        <h1>書籍レビューアプリ</h1>
+    <header className="header">
+      <h1>書籍レビューアプリ</h1>
 
-        {auth ? (
-          <>
-            <p>ユーザー：{username}</p>
-            <button onClick={handleLogOut} className="header__logout-button">ログアウト</button>
-          </>
-        ) : (
-          <button onClick={handleLogIn} className="header__login-button">ログイン</button>
-        )}
-      </header>
+      {auth ? (
+        <>
+          <p>ユーザー：{username.name}</p>
+          <button onClick={handleLogOut} className="header__logout-button">
+            ログアウト
+          </button>
+          <button onClick={handleEditProfile}>プロフィール画面へ</button>
+        </>
+      ) : (
+        <button onClick={handleLogIn} className="header__login-button">
+          ログイン
+        </button>
+      )}
+    </header>
   );
 };

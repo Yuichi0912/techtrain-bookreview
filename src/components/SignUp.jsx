@@ -5,13 +5,13 @@ import Compressor from "compressorjs";
 import axios from "axios";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { logIn } from "../redux/authSlice";
 import { useEffect } from "react";
 import "./SignUp.scss";
+import { url } from "../const";
 
 export const SignUp = () => {
-  const auth = useSelector((state) => state.auth.isLogIn);
   const [image, setImage] = useState("");
   const [cookies, setCookie] = useCookies();
   const dispatch = useDispatch();
@@ -45,9 +45,6 @@ export const SignUp = () => {
   // console.log(values);
   // valuesにFormikで渡した値が入っている
 
-  useEffect(() => {
-    if (auth) return navigate("/");
-  }, []);
 
   const onSignUp = () => {
     // ユーザー情報のPOST
@@ -55,7 +52,7 @@ export const SignUp = () => {
     console.log(data);
     axios
       .post(
-        "https://ifrbzeaz2b.execute-api.ap-northeast-1.amazonaws.com/users",
+        `${url}/users`,
         data
       )
       .then((res) => {
@@ -81,7 +78,7 @@ export const SignUp = () => {
             console.log(formData);
             axios
               .post(
-                "https://ifrbzeaz2b.execute-api.ap-northeast-1.amazonaws.com/uploads",
+                `${url}/uploads`,
                 formData,
                 {
                   headers: {

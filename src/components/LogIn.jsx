@@ -5,13 +5,13 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import axios from "axios";
 import { useCookies } from "react-cookie";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { logIn } from "../redux/authSlice";
 import { useEffect } from "react";
-import "./LogIn.scss"
+import "./LogIn.scss";
+import { url } from "../const";
 
 export const LogIn = () => {
-  const auth = useSelector((state)=>state.auth.isLogIn)
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [errorLogInMsg, setErrorLogInMsg] = useState("");
@@ -36,19 +36,12 @@ export const LogIn = () => {
     validationSchema: schema,
   });
 
-  useEffect(()=>{
-    if (auth) return navigate("/");  
-  },[])
-
   const onLogIn = () => {
     const data = values;
     console.log(data);
 
     axios
-      .post(
-        "https://ifrbzeaz2b.execute-api.ap-northeast-1.amazonaws.com/signin",
-        data
-      )
+      .post(`${url}/signin`, data)
       .then((res) => {
         console.log(res.data.token);
         const token = res.data.token;
@@ -60,10 +53,7 @@ export const LogIn = () => {
       .catch(() => {
         setErrorLogInMsg("ログインに失敗しました。");
       });
-
   };
-
-
 
   return (
     <div>
@@ -106,7 +96,9 @@ export const LogIn = () => {
           </button>
         </form>
 
-        <Link to="/signup" className="new-account">アカウントの新規作成はこちら</Link>
+        <Link to="/signup" className="new-account">
+          アカウントの新規作成はこちら
+        </Link>
         <p className="error-message">{errorLogInMsg}</p>
       </main>
     </div>
