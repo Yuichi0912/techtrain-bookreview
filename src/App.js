@@ -1,3 +1,4 @@
+// import { Router } from "react-router-dom";
 import "./App.scss";
 import {
   BrowserRouter as Router,
@@ -11,9 +12,18 @@ import { SignUp } from "./components/SignUp";
 import { Home } from "./components/Home";
 import { useSelector } from "react-redux";
 import { Profile } from "./components/Profile";
+import { PostReview } from "./components/PostReview";
+import {Detail} from "./components/Detail"
+import { Editbook } from "./components/Editbook";
 
 export const App = () => {
+  // return(
+  // <div>
+  //   <Router />
+  // </div>
+  // )
   const auth = useSelector((state) => state.auth.isLogIn);
+  // console.log(state);
 
   return (
     <Router>
@@ -26,6 +36,9 @@ export const App = () => {
               <Route path="/signup" element={<Navigate to="/" />} />
               <Route path="/" element={<Home />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/new" element={<PostReview />} />
+              <Route path="/detail/:id" element={<Detail />} />
+              <Route path="/edit/:id" element={<Editbook />} />
             </>
           ) : (
             <>

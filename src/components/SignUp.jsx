@@ -7,7 +7,6 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { useDispatch} from "react-redux";
 import { logIn } from "../redux/authSlice";
-import { useEffect } from "react";
 import "./SignUp.scss";
 import { url } from "../const";
 
