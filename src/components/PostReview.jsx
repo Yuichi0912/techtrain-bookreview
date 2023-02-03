@@ -41,7 +41,7 @@ export const PostReview = () => {
   return (
     <div className="registerbooks">
       <form className="registerbooks-form">
-      <h2>書籍登録画面</h2>
+              <h2>書籍登録画面</h2>
 
       <label>タイトル</label>
       <input

@@ -6,6 +6,7 @@ import ReactPaginate from "react-paginate";
 import "./Home.scss";
 import { url } from "../const";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export const Home = () => {
   const [cookies] = useCookies();
@@ -76,7 +77,12 @@ export const Home = () => {
       <main>
         <p className="review-list__errormsg">{errorMessage}</p>
         <h1>書籍レビュー一覧</h1>
-        <button className="review-list__registerbutton" onClick={() => navigate("/new")}>書籍を登録する</button>
+        <button
+          className="review-list__registerbutton"
+          onClick={() => navigate("/new")}
+        >
+          書籍を登録する
+        </button>
         {lists.map((lists) => {
           // console.log(lists);
           return (
@@ -93,10 +99,16 @@ export const Home = () => {
                 レビュワー:{lists.reviewer}
               </p>
               <a href={lists.url} className="review-lists__url">
-                {lists.url} 
+                {lists.url}
               </a>
               <p className="review-lists__review">▶︎{lists.review}</p>
-              
+              {lists.isMine ? (
+                <button onClick={() => navigate(`/edit/${lists.id}`)}>
+                  編集画面
+                </button>
+              ) : (
+                <></>
+              )}
             </div>
           );
         })}
