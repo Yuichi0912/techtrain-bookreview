@@ -103,7 +103,7 @@ export const Home = () => {
               </a>
               <p className="review-lists__review">▶︎{lists.review}</p>
               {lists.isMine ? (
-                <button onClick={() => navigate(`/edit/${lists.id}`)}>
+                <button onClick={() => navigate(`/edit/${lists.id}`)} className="review-lists__button">
                   編集画面
                 </button>
               ) : (
